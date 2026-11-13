@@ -18,8 +18,8 @@ html{box-sizing:border-box;overscroll-behavior-y:none;-webkit-overflow-scrolling
 html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#fff;overscroll-behavior-y:none}
 body{background:#4d3f2a;display:flex;justify-content:center;padding:40px 16px 48px;position:relative;overflow-x:hidden}
 .bg-media-ambient{display:none}
-.bg-media{position:fixed;top:0;left:0;right:0;width:100vw;height:100lvh;min-height:100vh;min-height:-webkit-fill-available;z-index:0;pointer-events:none;transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0);backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;overflow:hidden}
-.bg-vid{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) translate3d(0,0,0);-webkit-transform:translate(-50%,-50%) translate3d(0,0,0);width:100%;height:100%;min-width:100%;min-height:100%;object-fit:cover;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.bg-media{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;height:100lvh;min-height:100vh;min-height:-webkit-fill-available;z-index:0;pointer-events:none;transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0);backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;overflow:hidden}
+.bg-vid{width:100%;height:100%;object-fit:cover;object-position:center top;transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .bg-ov{position:fixed;top:0;left:0;right:0;width:100vw;height:100lvh;min-height:100vh;background:linear-gradient(to bottom,rgba(77,63,42,0.42) 0%,rgba(0,0,0,0.2) 80px,rgba(0,0,0,0.3) 100%);z-index:1;pointer-events:none;transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0)}
 #bio-mount,.wrap{position:relative;z-index:2;width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:12px}
 
@@ -199,20 +199,7 @@ body{background:#4d3f2a;display:flex;justify-content:center;padding:40px 16px 48
   }
   setupVideoSound();
 
-  (function lockViewport(){
-    var bg = document.querySelector('.bg-media');
-    var ov = document.querySelector('.bg-ov');
-    if (!bg) return;
-    function syncH(){
-      var h = Math.max(window.innerHeight, (window.screen && window.screen.height) || 0);
-      bg.style.height = h + 'px';
-      if (ov) ov.style.height = h + 'px';
-    }
-    syncH();
-    window.addEventListener('orientationchange', function(){
-      setTimeout(syncH, 300);
-    });
-  })();
+
 })();
 </script>
 </body>
