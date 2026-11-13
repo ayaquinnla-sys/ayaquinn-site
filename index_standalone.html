@@ -486,6 +486,8 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 .bio-lb.open {
   display: flex;
@@ -505,6 +507,7 @@ html, body {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.15);
   animation: bioLbZ 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   background: #000;
+  cursor: pointer;
 }
 @keyframes bioLbZ {
   from { transform: scale(0.92); opacity: 0.5; }
@@ -1150,24 +1153,9 @@ html, body {
       });
     });
 
-    if (lbClose) {
-      lbClose.addEventListener('click', function (e) {
-        e.stopPropagation();
-        closeLb();
-      });
-    }
-
-    lb.addEventListener('click', function (e) {
-      if (e.target === lb || e.target === lbClose || e.target.closest('#bio-lb-close')) {
-        closeLb();
-      }
+    lb.addEventListener('click', function () {
+      closeLb();
     });
-
-    if (lbFrame) {
-      lbFrame.addEventListener('click', function (e) {
-        e.stopPropagation();
-      });
-    }
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && lb.classList.contains('open')) {
