@@ -3,24 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#4d3f2a" />
+<meta name="msapplication-navbutton-color" content="#4d3f2a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title>Aya Quinn — Official Links, Photos & Video</title>
 <meta name="description" content="Official bio page with socials, photos and videos." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#fff}
-body{background:#07090f;display:flex;justify-content:center;padding:40px 16px 48px;position:relative;overflow-x:hidden}
+html{box-sizing:border-box;overscroll-behavior-y:none;-webkit-overflow-scrolling:touch}
+*,*:before,*:after{box-sizing:inherit}
+html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;color:#fff;overscroll-behavior-y:none}
+body{background:#4d3f2a;display:flex;justify-content:center;padding:40px 16px 48px;position:relative;overflow-x:hidden}
 .bg-media-ambient{display:none}
-.bg-media{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.bg-vid{object-fit:cover;width:100%;height:100%}
-.bg-ov{position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:1;pointer-events:none}
+.bg-media{position:fixed;top:0;left:0;right:0;width:100vw;height:100lvh;min-height:100vh;min-height:-webkit-fill-available;z-index:0;pointer-events:none;transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0);backface-visibility:hidden;-webkit-backface-visibility:hidden;will-change:transform;overflow:hidden}
+.bg-vid{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) translate3d(0,0,0);-webkit-transform:translate(-50%,-50%) translate3d(0,0,0);width:100%;height:100%;min-width:100%;min-height:100%;object-fit:cover;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.bg-ov{position:fixed;top:0;left:0;right:0;width:100vw;height:100lvh;min-height:100vh;background:linear-gradient(to bottom,rgba(77,63,42,0.42) 0%,rgba(0,0,0,0.2) 80px,rgba(0,0,0,0.3) 100%);z-index:1;pointer-events:none;transform:translate3d(0,0,0);-webkit-transform:translate3d(0,0,0)}
 #bio-mount,.wrap{position:relative;z-index:2;width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:12px}
 
 @media (min-width:600px){
   .bg-media-ambient{display:block;position:fixed;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);z-index:0;pointer-events:none;filter:blur(54px) saturate(160%) brightness(.55);transform:scale(1.12);object-fit:cover}
-  .bg-media{left:50%!important;right:auto!important;transform:translateX(-50%)!important;width:100%!important;max-width:480px!important;height:100vh!important;box-shadow:0 0 120px rgba(0,0,0,.9);z-index:1!important}
-  .bg-ov{z-index:2!important;max-width:480px;left:50%!important;transform:translateX(-50%)!important}
+  .bg-media{left:50%!important;right:auto!important;transform:translateX(-50%) translate3d(0,0,0)!important;-webkit-transform:translateX(-50%) translate3d(0,0,0)!important;width:100%!important;max-width:480px!important;height:100vh!important;height:100lvh!important;box-shadow:0 0 120px rgba(0,0,0,.9);z-index:1!important}
+  .bg-ov{z-index:2!important;max-width:480px;left:50%!important;transform:translateX(-50%) translate3d(0,0,0)!important;-webkit-transform:translateX(-50%) translate3d(0,0,0)!important}
   #bio-mount,.wrap{z-index:3!important}
 }
 
@@ -192,6 +198,21 @@ body{background:#07090f;display:flex;justify-content:center;padding:40px 16px 48
     });
   }
   setupVideoSound();
+
+  (function lockViewport(){
+    var bg = document.querySelector('.bg-media');
+    var ov = document.querySelector('.bg-ov');
+    if (!bg) return;
+    function syncH(){
+      var h = Math.max(window.innerHeight, (window.screen && window.screen.height) || 0);
+      bg.style.height = h + 'px';
+      if (ov) ov.style.height = h + 'px';
+    }
+    syncH();
+    window.addEventListener('orientationchange', function(){
+      setTimeout(syncH, 300);
+    });
+  })();
 })();
 </script>
 </body>
